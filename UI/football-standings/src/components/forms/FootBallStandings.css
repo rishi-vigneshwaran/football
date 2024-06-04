@@ -1,0 +1,18 @@
+.standings-form {
+  height: auto;
+  width: 50%;
+  margin-left: 3rem;
+  padding: 20px;
+}
+
+.standings-form-container {
+  margin-top: 4rem;
+}
+
+.submit-button {
+  margin: 10px;
+}
+
+Label {
+  padding: 5px;
+}

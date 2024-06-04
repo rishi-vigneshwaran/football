@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+/* .right-panel {
+  margin-right: 0px;
+}
+
+.nav-container {
+  display: flex;
+} */
+
+.header-main {
+  height: 3rem;
+  background-color: #c187f9;
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  display: flex;
+  font-style: normal;
+}
+
+.header-right {
+  position: absolute;
+  margin-right: 2rem;
+  right: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pad-40 {
+  padding-top: 40px;
+}
+.nav-container {
+  padding-right: 15px; /* Add some padding to the right side */
+}
