@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:8080/api/v1/country";
+import { urls, apiVersion, localhost } from "./../constants/url.constants";
+
+const API_URL = localhost + apiVersion + urls.country;
 
 async function fetchCountries() {
   const response = await fetch(API_URL);

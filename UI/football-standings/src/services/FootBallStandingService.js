@@ -1,9 +1,13 @@
+import { urls, apiVersion, localhost } from "./../constants/url.constants";
+
+const API_URL = localhost + apiVersion + urls.footballStandings;
+
 async function StandingsService(league, teamId = null) {
   if (!league || !league.length) {
     throw new Error("League information is missing or invalid");
   }
 
-  const url = `http://localhost:8080/api/v1/standings/${league}${
+  const url = `${API_URL}/${league}${
     teamId !== null ? `?teamName=${teamId}` : ""
   }`;
 

@@ -1,9 +1,13 @@
+import { urls, apiVersion, localhost } from "./../constants/url.constants";
+
+const API_URL = localhost + apiVersion + urls.team;
+
 async function TeamService(league) {
   if (!league) {
     throw new Error("League parameter is missing.");
   }
 
-  const url = `http://localhost:8080/api/v1/teams/${league}`;
+  const url = `${API_URL}/${league}`;
 
   try {
     const response = await fetch(url);

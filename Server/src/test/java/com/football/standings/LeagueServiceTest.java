@@ -2,6 +2,7 @@
  * 
  */
 package com.football.standings;
+import com.football.standings.exceptions.InternalException;
 import com.football.standings.models.LeagueModel;
 import com.football.standings.service.AuthService;
 import com.football.standings.service.LeagueService;
@@ -41,7 +42,7 @@ public class LeagueServiceTest {
     }
 
     @Test
-    public void testGetLeagues_Success() {
+    public void testGetLeagues_Success() throws InternalException {
         String mockToken = "valid-auth-token";
         when(authService.getAuthenticationKey()).thenReturn(mockToken);
 

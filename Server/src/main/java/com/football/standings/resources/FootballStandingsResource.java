@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.football.standings.exceptions.InternalException;
 import com.football.standings.models.CountryModel;
 import com.football.standings.models.LeagueModel;
 import com.football.standings.models.StandingsModel;
@@ -46,28 +47,28 @@ public class FootballStandingsResource {
 	private final TeamService teamService;
 	
 	@GetMapping("/standings/{leagueId}")
-	public ResponseEntity<List<StandingsModel>> getStandings(@PathVariable Integer leagueId, @PathParam(value = "teamName") String teamName) {
+	public ResponseEntity<List<StandingsModel>> getStandings(@PathVariable Integer leagueId, @PathParam(value = "teamName") String teamName) throws InternalException {
 		List<StandingsModel> response = standingsService.getStandings(leagueId, teamName);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/country")
-	public ResponseEntity<List<CountryModel>> getCountry() {
+	public ResponseEntity<List<CountryModel>> getCountry() throws InternalException {
 		List<CountryModel> response = countryService.getCountryList();
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/league/{countryId}")
-	public ResponseEntity<List<LeagueModel>> getLeague(@PathVariable Integer countryId) {
+	public ResponseEntity<List<LeagueModel>> getLeague(@PathVariable Integer countryId) throws InternalException {
 		List<LeagueModel> response = leagueService.getLeagues(countryId);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/teams/{leagueId}")
-	public ResponseEntity<List<TeamModel>> getTeam(@PathVariable Integer leagueId) {
+	public ResponseEntity<List<TeamModel>> getTeam(@PathVariable Integer leagueId) throws InternalException {
 		List<TeamModel> response = teamService.getTeams(leagueId);
 		
 		return ResponseEntity.ok(response);

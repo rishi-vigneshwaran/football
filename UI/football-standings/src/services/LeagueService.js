@@ -1,10 +1,12 @@
+import { urls, apiVersion, localhost } from "./../constants/url.constants";
+
 async function LeagueService(country) {
   if (!country || country.length === 0) {
     console.error("Invalid country data:", country);
     return [];
   }
 
-  let url = "http://localhost:8080/api/v1/league/" + country;
+  let url = localhost + apiVersion + urls.league + country;
 
   try {
     const response = await fetch(url);
