@@ -68,6 +68,11 @@ The microservice displays the following information via an UI mechanism (React p
 
 - Automated tests can be run using the appropriate commands in the respective frontend and backend directories (`npm test` for React and `./mvnw test` for Spring Boot).
 
+### Swagger Documentation
+
+The Swagger documentation for the backend API can be accessed [here](http://localhost:8080/swagger-ui/index.html?continue=).
+
+
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to this project, please fork the repository and create a pull request.
