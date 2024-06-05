@@ -81,6 +81,7 @@ const FootBallStandings = () => {
                 <Form.Select
                   value={selectedCountry}
                   onChange={(event) => setSelectedCountry(event.target.value)}
+                  id="country"
                 >
                   <option>Select Country</option>
                   {countryList.map((country) => (
@@ -93,6 +94,7 @@ const FootBallStandings = () => {
               <Form.Group controlId="league">
                 <Form.Label>League</Form.Label>
                 <Form.Select
+                  id="league"
                   value={selectedLeague}
                   onChange={(event) => setSelectedLeague(event.target.value)}
                   disabled={!selectedCountry}
@@ -108,8 +110,13 @@ const FootBallStandings = () => {
               <Form.Group controlId="team">
                 <Form.Label>Team</Form.Label>
                 <Form.Select
+                  id="team"
                   value={selectedTeam}
-                  onChange={(event) => setSelectedTeam(event.target.value)}
+                  onChange={(event) => {
+                    setSelectedTeam(event.target.value);
+                    setSubmission(false);
+                    console.log("Value changes!!");
+                  }}
                   disabled={!selectedLeague}
                 >
                   <option>Select Team</option>

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, waitFor, getByRole } from "@testing-library/react";
 import { act } from "react";
 import "@testing-library/jest-dom/extend-expect";
 import FootBallStandings from "./FootBallStandings";
@@ -44,27 +44,29 @@ describe("FootBallStandings component", () => {
     expect(getByLabelText("Team")).toBeInTheDocument();
   });
 
-  it("country api should be invoked once rendered", async () => {
+  it("country api should be invoked once component rendered", async () => {
     const { getByText, getByLabelText } = render(<FootBallStandings />);
+    await act(async () => {
+      fireEvent.change(getByLabelText("Country"), {
+        target: { value: "Country 2" },
+      });
 
-    fireEvent.change(getByLabelText("Country"), {
-      target: { value: "Country 2" },
-    });
-
-    await waitFor(() => {
-      expect(CountryService).toBeCalled();
+      await waitFor(() => {
+        expect(CountryService).toBeCalled();
+      });
     });
   });
 
   it("disables submit button if no team selected", async () => {
     const { getByText, getByLabelText } = render(<FootBallStandings />);
     const submitButton = getByText("Submit");
+    await act(async () => {
+      fireEvent.change(getByLabelText("Country"), { target: { value: "1" } });
+      fireEvent.change(getByLabelText("League"), { target: { value: "1" } });
 
-    fireEvent.change(getByLabelText("Country"), { target: { value: "1" } });
-    fireEvent.change(getByLabelText("League"), { target: { value: "1" } });
-
-    await waitFor(() => {
-      expect(submitButton).toBeDisabled();
+      await waitFor(() => {
+        expect(submitButton).toBeDisabled();
+      });
     });
   });
 });

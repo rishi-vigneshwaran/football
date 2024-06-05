@@ -1,0 +1,9 @@
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+WORKDIR /app
+
+COPY target/standings-1.0.0.jar /app/standings-1.0.0.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "standings-1.0.0.jar"]
