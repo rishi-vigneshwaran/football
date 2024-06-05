@@ -70,7 +70,7 @@ The microservice displays the following information via an UI mechanism (React p
 
 ### Swagger Documentation
 
-The Swagger documentation for the backend API can be accessed [here](http://localhost:8080/swagger-ui/index.html?continue=).
+The Swagger documentation for the backend API can be accessed http://localhost:8080/swagger-ui/index.html
 
 
 ## Contributing
