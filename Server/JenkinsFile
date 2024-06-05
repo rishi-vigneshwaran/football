@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'standings'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/rishi-vigneshwaran/football/tree/release/R24.05/Server'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh './mvnw clean package'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build(env.DOCKER_IMAGE)
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    docker.run('-p 8080:8080 -d --name my-backend-container standings')
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            script {
+                docker.image('standings').stop()
+                docker.image('standings').remove()
+            }
+        }
+    }
+}

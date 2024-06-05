@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    environment {
+        NODE_VERSION = '14'
+        NPM_VERSION = '6'
+        DOCKER_IMAGE = 'football-standings'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/rishi-vigneshwaran/football/tree/release/R24.05/UI/football-standings'
+            }
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                tool name: 'NodeJS ' + env.NODE_VERSION, type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+
+                sh 'npm install'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build(env.DOCKER_IMAGE)
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                // Run the Docker container
+                script {
+                    docker.run('-p 80:80 -d --name frontend-container football-standings')
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up - remove the container
+            script {
+                docker.image('football-standings').stop()
+                docker.image('football-standings').remove()
+            }
+        }
+    }
+}
